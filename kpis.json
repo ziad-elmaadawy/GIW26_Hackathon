@@ -1,0 +1,86 @@
+{
+  "built_at": "2026-11-27T22:52:18",
+  "buildings": {
+    "source": "Overture Maps (OSM + Microsoft + Google)",
+    "loaded": 26341,
+    "after_tag_filter": 26310,
+    "kept": 21135,
+    "height_coverage_pct": 0.2
+  },
+  "params": {
+    "utm_epsg": 32636,
+    "min_footprint_m2": 40,
+    "usable_fraction": 0.4,
+    "kwp_per_m2": 0.15,
+    "pv_min_kwp": 20.0,
+    "hot_percentile": 67,
+    "simplify_m": 0.5,
+    "coord_decimals": 5,
+    "lst_scale": 0.00341802,
+    "lst_offset": 149.0,
+    "stac_range": "2025-06-01/2026-08-31",
+    "summer_months": [
+      6,
+      7,
+      8
+    ],
+    "max_cloud": 15
+  },
+  "class_counts": {
+    "Solar PV": 5357,
+    "Cool-roof": 4519,
+    "Both": 2502,
+    "Low priority": 8757
+  },
+  "total_footprint_m2": 7040229.0,
+  "median_footprint_m2": 299.0,
+  "pv_capable_buildings": 7859,
+  "pv_capable_kwp": 259580.0,
+  "pv_gross_gwh_per_year": 476.33,
+  "pvgis_yield_kwh_per_kwp": {
+    "min": 1795.0,
+    "max": 1875.0,
+    "mid": 1835.0
+  },
+  "lst": {
+    "method": "zonal_mean_all_touched",
+    "valid_buildings": 21135,
+    "mean": 45.15,
+    "std": 1.28,
+    "min": 40.58,
+    "max": 51.13,
+    "hot_threshold_c": 45.57,
+    "unique_30m_pixels": 15711,
+    "buildings_per_30m_pixel": 1.3,
+    "unique_100m_native_cells": 3342,
+    "buildings_per_100m_native_cell": 6.3
+  },
+  "sensitivity": {
+    "pv_capable": {
+      "usable=0.3|min_kwp=10": 14495,
+      "usable=0.3|min_kwp=15": 7859,
+      "usable=0.3|min_kwp=20": 2807,
+      "usable=0.4|min_kwp=10": 16597,
+      "usable=0.4|min_kwp=15": 13349,
+      "usable=0.4|min_kwp=20": 7859,
+      "usable=0.5|min_kwp=10": 17622,
+      "usable=0.5|min_kwp=15": 15321,
+      "usable=0.5|min_kwp=20": 12621
+    },
+    "hot": {
+      "p50": 10585,
+      "p67": 7021,
+      "p80": 4269
+    }
+  },
+  "lst_scenes": [
+    "LC09_L2SP_176039_20250727_02_T1 (2025-07-27, cloud 0.75)",
+    "LC08_L2SP_176039_20260823_02_T1 (2026-08-23, cloud 0.77)",
+    "LC09_L2SP_176039_20260831_02_T1 (2026-08-31, cloud 1.76)",
+    "LC08_L2SP_176039_20260706_02_T1 (2026-07-06, cloud 2.41)",
+    "LC08_L2SP_176039_20260722_02_T1 (2026-07-22, cloud 2.54)",
+    "LC08_L2SP_176039_20260807_02_T1 (2026-08-07, cloud 2.56)",
+    "LC08_L2SP_176039_20250719_02_T1 (2025-07-19, cloud 2.73)",
+    "LC08_L2SP_176039_20250820_02_T1 (2025-08-20, cloud 3.0)"
+  ]
+}
