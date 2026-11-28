@@ -1,0 +1,9 @@
+{
+  "n_buildings": 21135,
+  "n_scenes": 8,
+  "spearman_scenes_1_4_vs_5_8": 0.9547,
+  "spearman_even_vs_odd_scenes": 0.9577,
+  "spearman_2025_vs_2026": 0.9117,
+  "hotspot_top33_agreement_pct": 88.5,
+  "demeaned_median_abs_diff_c": 0.23
+}

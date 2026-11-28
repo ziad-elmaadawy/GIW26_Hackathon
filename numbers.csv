@@ -1,23 +1,26 @@
-id,category,metric,value,unit,source,status,owner,notes
-O-001,Organiser,Video submission deadline,2026-12-05,date,GIW26 Email,VERIFIED,All,Internal target Fri 4 Dec
-O-002,Organiser,Finals date & venue,2026-12-16,date,GIW26 Guidelines,VERIFIED,All,GUC Hall D1
-O-003,Organiser,AOI pilot area,42.64,km2,"BBox 31.42,29.98,31.50,30.03",VERIFIED,Ziad,"Fifth Settlement, New Cairo"
-S-001,Spatial,Eligible buildings analyzed,21135,buildings,Overture Maps (OSM+MS+Google),VERIFIED,Ziad,"From 26,341 raw; >=40 m2; excl. sheds/stadiums/mosques"
-S-002,Spatial,Building height coverage,0.2,%,Overture Maps,VERIFIED,Ziad,42 buildings; 3D shading excluded transparently
-S-003,Spatial,PVGIS solar yield range,1795-1875,kWh/kWp/yr,EU JRC PVGIS v5.3,VERIFIED,Ziad,"Mid 1,835; 4.4% spread across 7 Cairo districts"
-S-004,Spatial,Summer Landsat LST mean / cutoff,45.15 / 45.57,degC,Landsat 8/9 C2 L2 (8 scenes),VERIFIED,Ziad,Std 1.28 C; 67th percentile hot threshold
-S-005,Spatial,Thermal cell density,6.3,bldgs/100m cell,Landsat TIRS native 100m,VERIFIED,Ziad,1.3 bldgs per 30m USGS resampled pixel
-R-001,Result,Class: Solar PV only,5357,buildings,kpis.json,VERIFIED,Ziad,25.3% of pilot roofs
-R-002,Result,Class: Both (Priority),2502,buildings,kpis.json,VERIFIED,Ziad,11.8% of pilot roofs (large + hot)
-R-003,Result,Class: Cool-roof only,4519,buildings,kpis.json,VERIFIED,Ziad,21.4% of pilot roofs (smaller + hot)
-R-004,Result,Class: Low priority,8757,buildings,kpis.json,VERIFIED,Ziad,41.5% of pilot roofs
-R-005,Result,Total PV-capable capacity & gen,259.6 / 476.33,MWp / GWh/yr,kpis.json,VERIFIED,Ziad,"7,859 PV-capable roofs (37.2%) gross potential"
-A-001,Assumption,Usable flat-roof fraction,40,%,Engineering screening param,NEEDS_REF,Ziad,"Accounts for tanks, stairwells, HVAC, setbacks; slider-tested"
-A-002,Assumption,PV power density,0.15,kWp/m2,Standard tilted flat-roof PV,NEEDS_REF,Ziad,25 deg south rows with inter-row spacing
-A-003,Assumption,Egypt grid CO2 emission factor,0.46,kg CO2/kWh,IEA / EEHC benchmark,NEEDS_REF,Nourhan,Verify latest Egypt grid factor
-B-001,Business,EgyptERA Tier 7 residential cliff (>1000 kWh),2.74,EGP/kWh,EgyptERA Aug 2026 tariff,VERIFY_BI,Nourhan,"Flat rate on entire bill >1,000 kWh + 40 EGP service fee"
-B-002,Business,EgyptERA LV commercial/shared tariff,2.74,EGP/kWh,EgyptERA 2026 tariff,VERIFY_BI,Nourhan,Confirm current LV commercial/compound rate
-B-003,Business,Installed Solar PV CAPEX (Egypt),32000,EGP/kWp,Egypt 2026 solar market,VERIFY_BI,Nourhan,Verify 2-3 local Egyptian solar EPC quotes (e.g. KarmSolar/SolarizEgypt/local residential)
-B-004,Business,Reflective Cool-Roof coating CAPEX,120,EGP/m2,Egypt 2026 paint market,VERIFY_BI,Nourhan,Verify local elastomeric/cool-roof paint quote (e.g. Sika/CMB/Jotun Egypt)
-B-005,Business,Cool-Roof top-floor AC load saving,20,%,Hot-arid climate literature,VERIFY_BI,Nourhan,Add 1 peer-reviewed DOI/source for Cairo/hot-arid cool roofs
-B-006,Business,Target B2B pricing / revenue model,TBD,EGP/compound,BI research,TODO_BI,Nourhan,"E.g., B2B SaaS / per-compound audit fee or EPC lead-gen fee"
+id,category,metric,value,unit,source,source_date,status,owner,notes
+O-001,Organiser,Video submission deadline,2026-12-05,date,GIW26 Email,2026-11,VERIFIED,All,Internal target Fri 4 Dec
+O-002,Organiser,Finals date & venue,2026-12-16,date,GIW26 Guidelines PDF,2026-11,VERIFIED,All,GUC Hall D1
+O-003,Organiser,AOI pilot area,42.64,km2,"BBox 31.42,29.98,31.50,30.03",2026-11-27,VERIFIED,Ziad,"Fifth Settlement, New Cairo (EPSG:32636)"
+S-001,Spatial,Eligible buildings analyzed,21135,buildings,Overture Maps (OSM+MS+Google),2026-11-27,VERIFIED,Ziad,"From 26,341 raw; >=40 m2; excl. sheds/stadiums/mosques"
+S-002,Spatial,Building height coverage,0.2,%,Overture Maps,2026-11-27,VERIFIED,Ziad,42 buildings; 3D shading excluded (PV is upper bound)
+S-003,Spatial,PVGIS solar yield range,1795-1875,kWh/kWp/yr,EU JRC PVGIS v5.3,2026-11-27,VERIFIED,Ziad,"Mid 1,835; 4.4% spread across 7 Cairo districts"
+S-004,Spatial,Summer Landsat LST mean / cutoff,45.15 / 45.57,degC,USGS Landsat 8/9 C2 L2 (8 scenes),2025-2026,VERIFIED,Ziad,Std 1.28 C; 67th-pct relative hotspot cutoff
+S-005,Spatial,Thermal cell density,6.3,bldgs/100m cell,Landsat TIRS native 100m,2026-11-27,VERIFIED,Ziad,1.3 bldgs per 30m USGS resampled pixel
+S-006,Validation,Split-half LST Spearman rank corr.,TODO_RUN,rho,validate_lst.py (scenes 1-4 vs 5-8),2026-11-28,RUN_SCRIPT,Ziad,Run validate_lst.py in VS Code terminal (~20s)
+S-007,Validation,Satellite visual audit (n=50),TODO_CHECK,% match,validation_sample_50.csv on Esri Sat,2026-11-28,TODO_ENG,Nada/Daniel,Spot-check 50 random footprints on Satellite layer
+R-001,Scenario,Class: Solar PV only (default),5357,buildings,"kpis.json (usable=40%, >=20 kWp)",2026-11-27,VERIFIED,Ziad,25.3% scenario output under default sliders
+R-002,Scenario,Class: Both / Priority (default),2502,buildings,"kpis.json (usable=40%, >=20 kWp)",2026-11-27,VERIFIED,Ziad,11.8% scenario output (large + top-third LST)
+R-003,Scenario,Class: Cool-roof only (default),4519,buildings,kpis.json (hot >=45.57 C),2026-11-27,VERIFIED,Ziad,21.4% scenario output (smaller + top-third LST)
+R-004,Scenario,Class: Low priority (default),8757,buildings,kpis.json,2026-11-27,VERIFIED,Ziad,41.4% scenario output
+R-005,Scenario,Gross PV technical potential,259.6 / 476.33,MWp / GWh/yr,kpis.json,2026-11-27,VERIFIED,Ziad,"7,859 PV-capable roofs (37.2%); upper bound excl. shading"
+A-001,Assumption,Usable flat-roof fraction,40,%,Screening parameter (editable),2026-11-27,ASSUMPTION,Ziad,"Accounts for tanks, stairwells, HVAC, setbacks; slider-tested"
+A-002,Assumption,PV power density,0.15,kWp/m2,Standard tilted flat-roof PV,2026-11-27,ASSUMPTION,Ziad,25 deg south rows with inter-row spacing
+A-003,Assumption,Egypt grid CO2 factor,0.46,kg CO2/kWh,EEHC / IEA Egypt grid benchmark,2026,VERIFY_BI,Nourhan,Double-check latest published EEHC/IEA value
+B-001,Business,Residential Tariffs Tiers 1-6,0.68/0.95/1.15/1.72/2.18/2.40,EGP/kWh,EgyptERA Aug 1 2026 (Reslink / AsesKahraba),2026-08-01,VERIFIED,Nourhan,"Cumulative billing up to 1,000 kWh/mo"
+B-002,Business,"Residential Tier 7 (>1,000 kWh)",2.74,EGP/kWh,EgyptERA Aug 1 2026 (Reslink / AsesKahraba),2026-08-01,VERIFIED,Nourhan,FLAT on total consumption + 40 EGP service; 2nd hike in 2026
+B-003,Business,"Commercial top slab (>1,000 kWh)",2.79,EGP/kWh,EgyptERA May 2026 update (Reslink),2026-05,VERIFIED,Nourhan,Shops >1k = 2.79; 601-1k = 2.74; LV other uses = 2.74
+B-004,Business,Installed Solar PV CAPEX (Egypt),32000,EGP/kWp,MIMAH Egypt 2026 guide (30k-55k res / 25k-38k comm),2026-08-08,VERIFIED,Nourhan,"Simple payback excludes O&M, inverter replacement, financing"
+B-005,Business,Net-metering cap & rules,50 kW (1:1 kWh),kW,EgyptERA / MIMAH 2026 regulatory guide,2026-08-08,VERIFIED,Nourhan,Sized <= max annual load; 50-500 kW uses net billing
+B-006,Business,Cool-roof Cairo climate evidence,Cool > Green roofs,DOI,Jia et al. npj Urban Sustain 4:23 (DOI 10.1038/s42949-024-00159-8),2024-04,VERIFIED,Nourhan,Explicitly models Cairo; used for prioritization flag (120 EGP/m2 indicative)
+B-007,Business,B2B revenue model / audit pricing,TBD_BI,EGP/compound,Nourhan BI pricing model,2026-11-28,TODO_BI,Nourhan,Nourhan confirms 1 concrete B2B SaaS / EPC lead-gen / site-audit price

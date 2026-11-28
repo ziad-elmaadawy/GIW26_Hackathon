@@ -74,7 +74,7 @@
     .btn:hover { color: var(--text); background: rgba(255,255,255,0.08); }
     .btn.active { color: #0b1120; background: var(--accent); border-color: var(--accent); }
 
-    /* Landmark Quick-Jump Bar (Bottom Center — fits cleanly without clipping) */
+    /* Landmark Quick-Jump Bar */
     .landmark-bar {
       position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
       z-index: 460; display: flex; align-items: center; gap: 5px; flex-wrap: nowrap;
@@ -227,7 +227,7 @@
     }
 
     .note-box {
-      font-size: 9.8px; color: var(--muted); line-height: 1.38;
+      font-size: 9.6px; color: var(--muted); line-height: 1.38;
       border-top: 1px solid var(--border); padding-top: 6px;
     }
 
@@ -336,7 +336,7 @@
 
       <div>
         <div class="sec-title">
-          <span>Intervention Classes</span>
+          <span>Scenario Classes</span>
           <span style="font-size:10px;color:#38bdf8;cursor:pointer" onclick="resetFilters()">Show all</span>
         </div>
         <div class="class-list" id="classList"></div>
@@ -365,9 +365,9 @@
           <div class="ctrl-row">
             <div class="ctrl-head">
               <span>Hot Roof Cutoff (LST)</span>
-              <span id="lblHotThr">45.31 °C</span>
+              <span id="lblHotThr">45.57 °C</span>
             </div>
-            <input type="range" id="slHotThr" min="42.00" max="48.50" step="0.01" value="45.31" oninput="reclassify()" />
+            <input type="range" id="slHotThr" min="42.00" max="48.50" step="0.01" value="45.57" oninput="reclassify()" />
           </div>
           <div class="ctrl-row">
             <div class="ctrl-head">
@@ -381,7 +381,7 @@
 
       <div class="insight-box">
         <strong>Why not rank by sunlight?</strong><br />
-        PVGIS across 7 Cairo zones varies by only <strong>4.4%</strong> (1,795–1,875 kWh/kWp/yr). The real decision drivers are <strong>roof footprint</strong>, <strong>neighborhood thermal stress (LST)</strong>, and <strong>EgyptERA 2026 tariff cliffs</strong>.
+        PVGIS across 7 Cairo zones varies by only <strong>4.4%</strong> (1,795–1,875 kWh/kWp/yr). The real discriminators are <strong>roof footprint</strong>, <strong>neighborhood thermal rank (LST)</strong>, and <strong>EgyptERA Aug 2026 tariffs</strong>.
       </div>
     </div>
   </aside>
@@ -400,9 +400,9 @@
           <div class="m-sub" id="mUsable">Usable: —</div>
         </div>
         <div class="metric-box">
-          <div class="m-lbl">Zonal Mean LST</div>
+          <div class="m-lbl">Neighborhood LST</div>
           <div class="m-val" id="mLst">—</div>
-          <div class="m-sub" id="mLstDelta">Neighborhood heat</div>
+          <div class="m-sub" id="mLstDelta">Relative heat rank</div>
         </div>
         <div class="metric-box">
           <div class="m-lbl">Roof PV Capacity</div>
@@ -418,14 +418,14 @@
 
       <div>
         <div class="sec-title">
-          <span>EgyptERA Aug 2026 EGP Payback</span>
+          <span>EgyptERA Aug 2026 Simple Payback</span>
           <span style="color:#f59e0b;font-size:9.5px">Editable BI Inputs</span>
         </div>
 
         <div class="calc-card">
           <div class="toggle-row">
             <button class="mini-tab active" id="tabVilla" onclick="setSizingMode('villa')">Single Villa / Meter</button>
-            <button class="mini-tab" id="tabFull" onclick="setSizingMode('full')">Full Roof (Shared / B2B)</button>
+            <button class="mini-tab" id="tabFull" onclick="setSizingMode('full')">Commercial / Shared</button>
           </div>
 
           <div class="ctrl-row">
@@ -437,21 +437,21 @@
           </div>
 
           <div class="tier-banner cliff" id="tierBanner">
-            <span id="tierName">Tier 7 (&gt;1,000 kWh Flat)</span>
+            <span id="tierName">Tier 7 (&gt;1,000 Flat Cliff)</span>
             <strong id="tierRate">2.74 EGP/kWh</strong>
           </div>
 
           <div class="ctrl-row">
             <div class="ctrl-head">
-              <span>Solar CAPEX (Installed)</span>
+              <span>Solar CAPEX (Egypt 2026)</span>
               <span id="lblCapexKw">32,000 EGP/kWp</span>
             </div>
-            <input type="range" id="slCapexKw" min="22000" max="50000" step="1000" value="32000" oninput="updateFinance()" />
+            <input type="range" id="slCapexKw" min="22000" max="55000" step="1000" value="32000" oninput="updateFinance()" />
           </div>
 
           <div class="ctrl-row">
             <div class="ctrl-head">
-              <span>Cool-Roof Coating (Egypt 2026)</span>
+              <span>Cool-Roof Coating (Indicative)</span>
               <span id="lblCoolM2">120 EGP/m²</span>
             </div>
             <input type="range" id="slCoolM2" min="80" max="350" step="10" value="120" oninput="updateFinance()" />
@@ -459,15 +459,15 @@
 
           <div class="ctrl-row">
             <div class="ctrl-head">
-              <span>Cool-Roof Top-Floor AC Saving</span>
+              <span>Top-Floor AC Saving (Screening)</span>
               <span id="lblCoolPct">20%</span>
             </div>
-            <input type="range" id="slCoolPct" min="5" max="30" step="1" value="20" oninput="updateFinance()" />
+            <input type="range" id="slCoolPct" min="5" max="35" step="1" value="20" oninput="updateFinance()" />
           </div>
 
           <div class="result-grid">
             <div class="res-box highlight">
-              <div class="res-lbl">Solar Payback</div>
+              <div class="res-lbl">Solar Simple Payback</div>
               <div class="res-val" id="rPvPayback">—</div>
               <div class="res-sub" id="rPvSize">Sized: — kWp</div>
             </div>
@@ -477,7 +477,7 @@
               <div class="res-sub" id="rPvSave">Saves — EGP/yr</div>
             </div>
             <div class="res-box">
-              <div class="res-lbl">Cool-Roof Payback</div>
+              <div class="res-lbl">Cool-Roof (Screening)</div>
               <div class="res-val" id="rCoolPayback">—</div>
               <div class="res-sub" id="rCoolCapex">CAPEX: — EGP</div>
             </div>
@@ -489,7 +489,7 @@
           </div>
 
           <div class="note-box">
-            <strong>EgyptERA Aug 2026 Cliff Rules:</strong> &gt;650 kWh bills flat @ 2.41 EGP; &gt;1,000 kWh bills flat @ 2.74 EGP on total use. Coating benchmark: 120 EGP/m² reflective acrylic (verify local EPC quotes in <code>numbers.csv</code>).
+            <strong>Aug 1, 2026 Tariff Rules:</strong> Cumulative Tiers 1–6 (0.68–2.40 EGP); only <strong>Tier 7 (&gt;1,000 kWh)</strong> bills flat @ 2.74 EGP on total use. Commercial &gt;1,000 kWh: 2.79 EGP. Simple payback excludes O&amp;M, inverter replacement &amp; financing.
           </div>
         </div>
       </div>
@@ -508,7 +508,7 @@
           <input type="file" id="fileInput" accept=".geojson,.json" style="display:none" />
         </label>
         <div class="code-hint">
-          Run inside <strong>Desktop\GIW26_Hackathon</strong>:<br />
+          Run inside <strong>Projects\giw26-cairo-roof-engine</strong>:<br />
           <strong>python -m http.server 8000</strong><br />
           Then open <strong>http://localhost:8000</strong>
         </div>
@@ -614,17 +614,20 @@
       };
     }
 
-    // ---- OFFICIAL EGYPTERA AUGUST 2026 RESIDENTIAL BILL CALCULATOR ----
+    // ---- VERIFIED EGYPTERA AUGUST 1, 2026 RESIDENTIAL BILL CALCULATOR ----
+    // Cumulative Tiers 1-6 (0.68, 0.95, 1.15, 1.72, 2.18, 2.40 EGP/kWh); Tier 7 (>1,000 kWh) flat 2.74 EGP/kWh on total use
     function calcEgyptBillMonthly(kwh) {
       const x = Math.max(0, kwh);
       if (x === 0) return { bill: 0, tier: 'Zero Net Use', rate: 0, isCliff: false };
+      if (x > 1000) {
+        return { bill: x * 2.74 + 40, tier: 'Tier 7 (>1,000 Flat Cliff)', rate: 2.74, isCliff: true };
+      }
       if (x <= 50) return { bill: x * 0.68 + 1, tier: 'Tier 1 (0–50 kWh)', rate: 0.68, isCliff: false };
-      if (x <= 100) return { bill: 50 * 0.68 + (x - 50) * 0.98 + 2, tier: 'Tier 2 (51–100 kWh)', rate: 0.98, isCliff: false };
-      if (x <= 200) return { bill: x * 1.15 + 6, tier: 'Tier 3 (0–200 kWh)', rate: 1.15, isCliff: false };
-      if (x <= 350) return { bill: 200 * 1.15 + (x - 200) * 1.73 + 11, tier: 'Tier 4 (201–350 kWh)', rate: 1.73, isCliff: false };
-      if (x <= 650) return { bill: 200 * 1.15 + 150 * 1.73 + (x - 350) * 2.14 + 15, tier: 'Tier 5 (351–650 kWh)', rate: 2.14, isCliff: false };
-      if (x <= 1000) return { bill: x * 2.41 + 25, tier: 'Tier 6 (651–1,000 Flat Cliff)', rate: 2.41, isCliff: true };
-      return { bill: x * 2.74 + 40, tier: 'Tier 7 (>1,000 Flat Cliff)', rate: 2.74, isCliff: true };
+      if (x <= 100) return { bill: 34.0 + (x - 50) * 0.95 + 2, tier: 'Tier 2 (51–100 kWh)', rate: 0.95, isCliff: false };
+      if (x <= 200) return { bill: 81.5 + (x - 100) * 1.15 + 6, tier: 'Tier 3 (101–200 kWh)', rate: 1.15, isCliff: false };
+      if (x <= 350) return { bill: 196.5 + (x - 200) * 1.72 + 11, tier: 'Tier 4 (201–350 kWh)', rate: 1.72, isCliff: false };
+      if (x <= 650) return { bill: 454.5 + (x - 350) * 2.18 + 15, tier: 'Tier 5 (351–650 kWh)', rate: 2.18, isCliff: false };
+      return { bill: 1108.5 + (x - 650) * 2.40 + 25, tier: 'Tier 6 (651–1,000 Cumulative)', rate: 2.40, isCliff: false };
     }
 
     function initDashboard(data) {
@@ -637,7 +640,7 @@
       }
 
       const defaultMinKwp = meta.pv_min_kwp || 20;
-      const defaultThr = meta.hot_threshold_c || 45.31;
+      const defaultThr = meta.hot_threshold_c || 45.57;
       const defaultUsable = Math.round((meta.usable_fraction || 0.40) * 100);
 
       document.getElementById('slMinKwp').value = defaultMinKwp;
@@ -675,7 +678,6 @@
       buildProvenance();
       buildLandmarks();
 
-      // Auto-select a representative villa (~180-260 m2) in "Both" or "Cool-roof" so payback looks crisp immediately
       const sample = rawData.features.find(f => f.properties._c === 2 && f.properties.a >= 335 && f.properties.a <= 420)
         || rawData.features.find(f => f.properties._c === 1 && f.properties.a >= 180 && f.properties.a <= 260)
         || rawData.features[0];
@@ -714,8 +716,16 @@
       const minKwp = parseFloat(document.getElementById('slMinKwp').value);
       const hotThr = parseFloat(document.getElementById('slHotThr').value);
       const usableFrac = parseFloat(document.getElementById('slUsable').value) / 100;
+      const baseUsable = meta.usable_fraction || 0.40;
+      const baseMinKwp = meta.pv_min_kwp || 20;
+      const baseThr = meta.hot_threshold_c || 45.57;
       const kwpPerM2 = meta.kwp_per_m2 || 0.15;
       const pvYield = meta.pvgis_yield_mid || 1835;
+
+      const isDefaultSliders =
+        Math.abs(usableFrac - baseUsable) < 1e-6 &&
+        Math.abs(minKwp - baseMinKwp) < 1e-6 &&
+        Math.abs(hotThr - baseThr) < 1e-3;
 
       document.getElementById('lblMinKwp').textContent = `${minKwp} kWp`;
       document.getElementById('lblHotThr').textContent = `${hotThr.toFixed(2)} °C`;
@@ -726,13 +736,18 @@
 
       for (const f of rawData.features) {
         const p = f.properties;
-        const k = p.a * usableFrac * kwpPerM2;
-        const isPv = k >= minKwp;
-        const isHot = p.t != null && Number(p.t.toFixed(2)) >= Number(hotThr.toFixed(2));
-        let c = 3;
-        if (isPv && !isHot) c = 0;
-        else if (!isPv && isHot) c = 1;
-        else if (isPv && isHot) c = 2;
+        const k = Math.abs(usableFrac - baseUsable) < 1e-6 ? p.k : (p.a * usableFrac * kwpPerM2);
+        let c;
+        if (isDefaultSliders) {
+          c = p.c; // Exact 0-error sync with kpis.json at default parameters
+        } else {
+          const isPv = k >= minKwp;
+          const isHot = p.t != null && Number(p.t.toFixed(2)) >= Number(hotThr.toFixed(2));
+          c = 3;
+          if (isPv && !isHot) c = 0;
+          else if (!isPv && isHot) c = 1;
+          else if (isPv && isHot) c = 2;
+        }
         p._k = Math.round(k * 10) / 10;
         p._c = c;
         counts[c]++;
@@ -865,8 +880,8 @@
       const base = calcEgyptBillMonthly(monthlyKwh);
       const banner = document.getElementById('tierBanner');
       banner.classList.toggle('cliff', sizingMode === 'villa' ? base.isCliff : false);
-      document.getElementById('tierName').textContent = sizingMode === 'villa' ? base.tier : 'Commercial / Shared Compound Meter';
-      document.getElementById('tierRate').textContent = sizingMode === 'villa' ? `${base.rate.toFixed(2)} EGP/kWh` : '2.74 EGP/kWh (LV)';
+      document.getElementById('tierName').textContent = sizingMode === 'villa' ? base.tier : 'Commercial (>1,000 kWh · May 2026)';
+      document.getElementById('tierRate').textContent = sizingMode === 'villa' ? `${base.rate.toFixed(2)} EGP/kWh` : '2.79 EGP/kWh';
 
       if (!selectedFeature) return;
       const p = selectedFeature.properties;
@@ -885,18 +900,18 @@
         newMonthlyBill = post.bill;
         annualPvSaving = Math.max(0, (base.bill - post.bill) * 12);
       } else {
-        annualPvSaving = sizedKw * pvYield * 2.74;
+        // EgyptERA May 2026 top commercial slab (>1,000 kWh) = 2.79 EGP/kWh
+        annualPvSaving = sizedKw * pvYield * 2.79;
       }
 
       const pvCapex = sizedKw * capexPerKw;
       const pvPayback = annualPvSaving > 0 ? pvCapex / annualPvSaving : Infinity;
       const co2Tonnes = (sizedKw * pvYield * 0.46) / 1000;
 
-      // Cool-Roof Economics: scales to top-floor AC load (~50% of villa bill, or ~45 kWh/m2/yr cooling intensity for large roofs)
       const coolCapex = p.a * coolPerM2;
       const annualCoolSaving = sizingMode === 'villa'
         ? (base.bill * 12) * 0.50 * coolSavePct
-        : (p.a * 45 * coolSavePct * 2.74);
+        : (p.a * 45 * coolSavePct * 2.79);
       const coolPayback = annualCoolSaving > 0 ? coolCapex / annualCoolSaving : Infinity;
 
       document.getElementById('rPvPayback').textContent = isFinite(pvPayback) ? `${pvPayback.toFixed(1)} yrs` : 'N/A';
@@ -912,18 +927,18 @@
       document.getElementById('rCo2').textContent = `${co2Tonnes.toFixed(1)} t/yr`;
       document.getElementById('rBillCompare').textContent = sizingMode === 'villa'
         ? `Bill: ${Math.round(base.bill).toLocaleString()} → ${Math.round(newMonthlyBill).toLocaleString()} EGP/mo`
-        : `LV Commercial @ 2.74 EGP/kWh`;
+        : `Commercial @ 2.79 EGP/kWh`;
     }
 
     function buildProvenance() {
       const ul = document.getElementById('provenanceList');
       const scenes = (meta.lst_scenes || []).slice(0, 4).join('<br>');
       ul.innerHTML = `
-        <li><strong>Building Footprints:</strong> ${meta.source || 'OpenStreetMap'} — ${(meta.n_buildings || 0).toLocaleString()} buildings ≥ 40 m² inside the 42.6 km² Fifth Settlement pilot zone (metric CRS EPSG:32636), excluding sheds, garages, stadiums, and places of worship. Height coverage: ${meta.height_coverage_pct ?? 1}%.</li>
-        <li><strong>Solar Irradiance (PVGIS):</strong> ${meta.pvgis_range ? meta.pvgis_range[0] + '–' + meta.pvgis_range[1] : '1,795–1,875'} kWh/kWp/yr across 7 Greater Cairo districts (4.4% spread → sunlight alone is flat).</li>
+        <li><strong>Building Footprints:</strong> ${meta.source || 'OpenStreetMap'} — ${(meta.n_buildings || 0).toLocaleString()} eligible roofs ≥ 40 m² in the 42.6 km² Fifth Settlement pilot (EPSG:32636), excluding sheds, garages, stadiums, and mosques. Height coverage: ${meta.height_coverage_pct ?? 0.2}% → 3D shading excluded (PV capacity is an upper bound).</li>
+        <li><strong>Solar Irradiance (PVGIS v5.3):</strong> ${meta.pvgis_range ? meta.pvgis_range[0] + '–' + meta.pvgis_range[1] : '1,795–1,875'} kWh/kWp/yr across 7 Greater Cairo districts (4.4% spread → sunlight alone is flat).</li>
         <li><strong>Thermal Stress (Landsat 8/9 C2 L2):</strong> Zonal mean over an 8-scene QA-masked summer median composite via Microsoft Planetary Computer.<br><span style="font-size:10.5px;color:#94a3b8">${scenes}</span></li>
-        <li><strong>Honest Thermal Limits:</strong> Native Landsat TIRS resolution is <strong>100 m</strong> (resampled by USGS to 30 m; ~${meta.buildings_per_100m_cell || '14'} buildings share a 100 m native cell), captured at mid-morning (~10:30 AM local). With building LST std ≈ ${meta.lst_std || '1.0'}°C vs. typical urban LST RMSE (~1.5–2.5°C), LST is used strictly as a <em>relative neighborhood hotspot screen</em>, not a single-roof thermometer.</li>
-        <li><strong>Financial Model:</strong> Implements EgyptERA August 1, 2026 residential tariff tiers (including &gt;650 and &gt;1,000 kWh flat-rate cliffs) and May 2026 LV commercial rate (2.74 EGP/kWh), with reflective roof coating benchmarked from 120 EGP/m² (Egypt 2026 market). Cross-verify all BI inputs in <code>numbers.csv</code>.</li>
+        <li><strong>Honest Thermal Limits:</strong> Native Landsat TIRS resolution is <strong>100 m</strong> (resampled to 30 m; ~${meta.buildings_per_100m_cell || '6.3'} buildings share a 100 m cell), captured ~10:30 AM local. Because building LST std (${meta.lst_std || '1.28'}°C) sits within absolute urban retrieval uncertainty, LST is used strictly as a <em>relative neighborhood hotspot rank</em>.</li>
+        <li><strong>Verified 2026 Economics:</strong> Implements EgyptERA Aug 1, 2026 residential tariffs (cumulative Tiers 1–6 up to 2.40 EGP; flat Tier 7 &gt;1,000 kWh @ 2.74 EGP) and May 2026 commercial top slab (2.79 EGP/kWh). Cool-roof prioritization cites Jia et al. (2024, <em>npj Urban Sustainability</em>, DOI 10.1038/s42949-024-00159-8). Simple payback excludes O&amp;M, inverter replacement, and financing.</li>
       `;
     }
     function openInfo() { document.getElementById('infoModal').style.display = 'flex'; }
